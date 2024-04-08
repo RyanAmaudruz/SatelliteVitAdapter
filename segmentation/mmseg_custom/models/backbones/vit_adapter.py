@@ -6,10 +6,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from mmseg.models.builder import BACKBONES
+
 from ops.modules import MSDeformAttn
 from timm.models.layers import trunc_normal_
 from torch.nn.init import normal_
 
+# from detection.ops.modules import MSDeformAttn
 from .base.vit import TIMMVisionTransformer
 from .adapter_modules import SpatialPriorModule, InteractionBlock, deform_inputs
 

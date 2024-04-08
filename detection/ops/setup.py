@@ -9,6 +9,9 @@
 import glob
 import os
 
+# os.environ["CUDA_HOME"] = '/gpfs/home2/ramaudruz/miniconda3/envs/vit_adapt/pkgs/cuda-toolkit/'
+# os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+
 import torch
 from setuptools import find_packages, setup
 from torch.utils.cpp_extension import CUDA_HOME, CppExtension, CUDAExtension
@@ -28,6 +31,7 @@ def get_extensions():
     extension = CppExtension
     extra_compile_args = {'cxx': []}
     define_macros = []
+
 
     if torch.cuda.is_available() and CUDA_HOME is not None:
         extension = CUDAExtension

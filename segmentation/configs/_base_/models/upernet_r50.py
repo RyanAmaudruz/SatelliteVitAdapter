@@ -1,4 +1,12 @@
 # model settings
+import numpy as np
+class_dist = [
+    0.00336, 0.00241, 0.00336, 0.00142, 0.00775, 0.18452, 0.34775, 0.20638, 0.00062, 0.1169, 0.09188, 0.01309, 0.00917,
+    0.00176, 0.00963
+]
+class_weight = [
+    1/np.log(1.02 + d) for d in class_dist
+]
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 model = dict(
     type='EncoderDecoder',
@@ -21,11 +29,14 @@ model = dict(
         pool_scales=(1, 2, 3, 6),
         channels=512,
         dropout_ratio=0.1,
-        num_classes=19,
+        num_classes=15,
         norm_cfg=norm_cfg,
         align_corners=False,
         loss_decode=dict(
-            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0,
+            class_weight=class_weight
+        )
+        ),
     auxiliary_head=dict(
         type='FCNHead',
         in_channels=1024,
@@ -34,11 +45,14 @@ model = dict(
         num_convs=1,
         concat_input=False,
         dropout_ratio=0.1,
-        num_classes=19,
+        num_classes=15,
         norm_cfg=norm_cfg,
         align_corners=False,
         loss_decode=dict(
-            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
+            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4,
+            class_weight=class_weight
+        )
+        ),
     # model training and testing settings
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))

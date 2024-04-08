@@ -314,7 +314,7 @@ class TIMMVisionTransformer(BaseModule):
                 windowed=window_attn[i], window_size=window_size[i], layer_scale=layer_scale, with_cp=with_cp)
             for i in range(depth)])
 
-        self.init_weights(pretrained)
+        # self.init_weights(pretrained)
 
     def init_weights(self, pretrained=None):
         if isinstance(pretrained, str):

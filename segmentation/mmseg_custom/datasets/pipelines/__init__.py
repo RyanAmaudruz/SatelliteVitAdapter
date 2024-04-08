@@ -1,8 +1,9 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 from .formatting import DefaultFormatBundle, ToMask
+from .loading import LoadImageFromFile_MS, AddMissingChannels
 from .transform import MapillaryHack, PadShortSide, SETR_Resize
 
 __all__ = [
     'DefaultFormatBundle', 'ToMask', 'SETR_Resize', 'PadShortSide',
-    'MapillaryHack'
+    'MapillaryHack', 'LoadImageFromFile_MS', 'AddMissingChannels'
 ]

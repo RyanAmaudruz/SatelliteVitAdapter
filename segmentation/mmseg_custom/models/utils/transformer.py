@@ -332,7 +332,7 @@ class FFN(BaseModule):
         return identity + self.dropout_layer(out)
 
 
-@TRANSFORMER_LAYER.register_module()
+@TRANSFORMER_LAYER.register_module(force=True)
 class DetrTransformerDecoderLayer(BaseTransformerLayer):
     """Implements decoder layer in DETR transformer.
 
@@ -377,7 +377,7 @@ class DetrTransformerDecoderLayer(BaseTransformerLayer):
             ['self_attn', 'norm', 'cross_attn', 'ffn'])
 
 
-@TRANSFORMER_LAYER_SEQUENCE.register_module()
+@TRANSFORMER_LAYER_SEQUENCE.register_module(force=True)
 class DetrTransformerEncoder(TransformerLayerSequence):
     """TransformerEncoder of DETR.
 
@@ -408,7 +408,7 @@ class DetrTransformerEncoder(TransformerLayerSequence):
         return x
 
 
-@TRANSFORMER_LAYER_SEQUENCE.register_module()
+@TRANSFORMER_LAYER_SEQUENCE.register_module(force=True)
 class DetrTransformerDecoder(TransformerLayerSequence):
     """Implements the decoder in DETR transformer.
 
@@ -545,7 +545,7 @@ class Transformer(BaseModule):
         return out_dec, memory
 
 
-@TRANSFORMER_LAYER_SEQUENCE.register_module()
+@TRANSFORMER_LAYER_SEQUENCE.register_module(force=True)
 class DeformableDetrTransformerDecoder(TransformerLayerSequence):
     """Implements the decoder in DETR transformer.
 

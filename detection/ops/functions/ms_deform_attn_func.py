@@ -9,6 +9,8 @@
 from __future__ import absolute_import, division, print_function
 
 import MultiScaleDeformableAttention as MSDA
+# from mmcv.ops.multi_scale_deform_attn import ext_module as MSDA
+
 import torch
 import torch.nn.functional as F
 from torch.autograd import Function

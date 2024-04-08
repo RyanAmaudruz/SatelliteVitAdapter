@@ -238,7 +238,7 @@ class SpatialPriorModule(nn.Module):
         self.with_cp = with_cp
 
         self.stem = nn.Sequential(*[
-            nn.Conv2d(3, inplanes, kernel_size=3, stride=2, padding=1, bias=False),
+            nn.Conv2d(13, inplanes, kernel_size=3, stride=2, padding=1, bias=False),
             nn.SyncBatchNorm(inplanes),
             nn.ReLU(inplace=True),
             nn.Conv2d(inplanes, inplanes, kernel_size=3, stride=1, padding=1, bias=False),
