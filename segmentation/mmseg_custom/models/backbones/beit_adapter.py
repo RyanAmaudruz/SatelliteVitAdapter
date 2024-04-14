@@ -17,7 +17,7 @@ from .adapter_modules import InteractionBlockWithCls as InteractionBlock
 _logger = logging.getLogger(__name__)
 
 
-@BACKBONES.register_module()
+@BACKBONES.register_module(force=True)
 class BEiTAdapter(BEiT):
     def __init__(self, pretrain_size=224, conv_inplane=64, n_points=4, deform_num_heads=6,
                  init_values=0., cffn_ratio=0.25, deform_ratio=1.0, with_cffn=True,

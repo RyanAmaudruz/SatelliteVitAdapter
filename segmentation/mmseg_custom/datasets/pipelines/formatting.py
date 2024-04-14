@@ -49,7 +49,7 @@ class DefaultFormatBundle(object):
         return self.__class__.__name__
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class ToMask(object):
     """Transfer gt_semantic_seg to binary mask and generate gt_labels."""
     def __init__(self, ignore_index=255):

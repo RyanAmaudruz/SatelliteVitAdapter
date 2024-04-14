@@ -460,7 +460,7 @@ class DetrTransformerDecoder(TransformerLayerSequence):
         return torch.stack(intermediate)
 
 
-@TRANSFORMER.register_module()
+@TRANSFORMER.register_module(force=True)
 class Transformer(BaseModule):
     """Implements the DETR transformer.
 
@@ -634,7 +634,7 @@ class DeformableDetrTransformerDecoder(TransformerLayerSequence):
         return output, reference_points
 
 
-@TRANSFORMER.register_module()
+@TRANSFORMER.register_module(force=True)
 class DeformableDetrTransformer(Transformer):
     """Implements the DeformableDETR transformer.
 
@@ -976,7 +976,7 @@ class DeformableDetrTransformer(Transformer):
                inter_references_out, None, None
 
 
-@TRANSFORMER.register_module()
+@TRANSFORMER.register_module(force=True)
 class DynamicConv(BaseModule):
     """Implements Dynamic Convolution.
 

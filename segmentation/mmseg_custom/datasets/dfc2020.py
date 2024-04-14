@@ -22,7 +22,7 @@ import os.path as osp
 
 
 
-@DATASETS.register_module()
+@DATASETS.register_module(force=True)
 class CustomMadosDataset(Dataset):
     """Custom dataset for semantic segmentation. An example of file structure
     is as followed.
@@ -491,7 +491,7 @@ class CustomMadosDataset(Dataset):
 
 
 
-@DATASETS.register_module()
+@DATASETS.register_module(force=True)
 class DFC2020Dataset(CustomMadosDataset):
     """DFC2020 dataset.
     

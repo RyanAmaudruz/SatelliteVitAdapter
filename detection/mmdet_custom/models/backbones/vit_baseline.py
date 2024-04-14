@@ -12,7 +12,7 @@ from .base.vit import ResBottleneckBlock
 _logger = logging.getLogger(__name__)
 
 
-@BACKBONES.register_module()
+@BACKBONES.register_module(force=True)
 class ViTBaseline(TIMMVisionTransformer):
     def __init__(self, pretrain_size=224, out_indices=None, *args, **kwargs):
 

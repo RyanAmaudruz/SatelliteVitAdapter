@@ -7,6 +7,8 @@ import time
 import warnings
 import sys
 
+import wandb
+
 sys.path.append('segmentation/')
 
 from api_train import init_random_seed, set_random_seed, train_segmentor
@@ -136,7 +138,15 @@ def main():
     if cfg.get('cudnn_benchmark', False):
         torch.backends.cudnn.benchmark = True
 
-    cfg['runner']['max_iters'] = 80_000
+    cfg['runner']['max_iters'] = 30_000
+
+    run = wandb.init(
+        # Set the project where this run will be logged
+        project="ViT-Adapter",
+        name='train_vit_adapter',
+        # Track hyperparameters and run metadata
+        config={k: getattr(args, k) for k in dir(args) if not k.startswith('_')},
+    )
 
     # work_dir is determined in this priority: CLI > segment in file > filename
     if args.work_dir is not None:
@@ -173,7 +183,7 @@ def main():
     # cfg.dump(osp.join(cfg.work_dir, osp.basename(args.config)))
     # init the logger before other steps
     timestamp = time.strftime('%Y%m%d_%H%M%S', time.localtime())
-    # log_file = osp.join(cfg.work_dir, f'{timestamp}.log')
+    log_file = osp.join(cfg.work_dir, f'{timestamp}.log')
     # logger = get_root_logger(log_file=log_file, log_level=cfg.log_level)
 
     # init the meta dict to record some important information such as
@@ -189,7 +199,7 @@ def main():
 
     # log some basic info
     # logger.info(f'Distributed training: {distributed}')
-    # logger.info(f'Config:\n{cfg.pretty_text}')
+    # logger.info(f'Config:\n{cfg}')
     print(f'Distributed training: {distributed}')
     print(f'Config:\n{cfg}')
 
@@ -226,7 +236,16 @@ def main():
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_19-44_ckpt0_vit_adapter_online_network.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-01_15-54_ckpt4_vit_adapter_ema_network.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-02_10-01_ckpt3_vit_adapter_ema_network.pth'
-    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_08-14_ckpt0_vit_adapter_online_network.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_08-14_ckpt0_vit_adapter_online_network.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/s2c_new_transforms_ck95_teacher_for_vit_adapt.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_08-14_ckpt2_vit_adapter_online_network.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_12-31_ckpt0_vit_adapter_online_network.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240411-123334_vit.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240412-220347_cp9_vit.pth'
+    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240413-132627_cp29_vit.pth'
+
+
+
 
     if pre_args.load_from is not None:
         state_dict = torch.load(pre_args.load_from, map_location="cpu")
@@ -235,8 +254,12 @@ def main():
 
     msg = model.load_state_dict(state_dict, strict=False)
 
+    print(f'Pretrained weights: {pretrained_weights}')
     print(f'Missing keys: {msg.missing_keys}')
     print(f'Unexpected keys: {msg.unexpected_keys}')
+
+    # logger.info(f'Missing keys: {msg.missing_keys}')
+    # logger.info(f'Unexpected keys: {msg.unexpected_keys}')
 
     # SyncBN is not support for DP
     if not distributed:
@@ -276,13 +299,18 @@ def main():
              # num_eval_images=100)
     ]
 
-    # for n, p in model.named_parameters():
-    #     if 'backbone.blocks' in n or 'backbone.patch_embed' in n:
-    #         p.requires_grad =  False
+    params_w_existing_weights = set([n for n, _ in model.named_parameters()]) - set(msg.missing_keys)
+
+    for n, p in model.named_parameters():
+        if n in params_w_existing_weights:
+            print(f'Setting no gradients for {n}')
+            p.requires_grad =  False
 
     # cfg_copy = copy.deepcopy(cfg)
 
-    pretrained_keys = set(state_dict.keys()) - set(msg.unexpected_keys)
+    # pretrained_keys = set(state_dict.keys()) - set(msg.unexpected_keys)
+
+    pretrained_keys = None
 
     train_segmentor(
         model,

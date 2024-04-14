@@ -19,7 +19,7 @@ from mmcv.runner import EvalHook as _EvalHook
 # from rsiseg.core.mask.structures import polygon_to_bitmap
 
 
-@HOOKS.register_module()
+@HOOKS.register_module(force=True)
 class WandbHookSeg(WandbLoggerHook):
     """Enhanced Wandb logger hook for MMDetection.
 

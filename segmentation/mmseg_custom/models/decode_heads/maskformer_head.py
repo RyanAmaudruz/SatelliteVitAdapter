@@ -12,7 +12,7 @@ from ...core import multi_apply, reduce_mean
 from ..builder import build_assigner, build_transformer
 
 
-@HEADS.register_module()
+@HEADS.register_module(force=True)
 class MaskFormerHead(BaseDecodeHead):
     """Implements the MaskFormer head.
 

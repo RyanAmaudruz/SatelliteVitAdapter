@@ -12,7 +12,7 @@ from ...core.anchor import MlvlPointGenerator
 from ..utils.transformer import MultiScaleDeformableAttention
 
 
-@PLUGIN_LAYERS.register_module()
+@PLUGIN_LAYERS.register_module(force=True)
 class MSDeformAttnPixelDecoder(BaseModule):
     """Pixel decoder with multi-scale deformable attention.
 

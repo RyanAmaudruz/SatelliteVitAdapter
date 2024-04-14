@@ -9,7 +9,7 @@ from mmseg.models.segmentors.base import BaseSegmentor
 from mmseg.ops import resize
 
 
-@SEGMENTORS.register_module()
+@SEGMENTORS.register_module(force=True)
 class EncoderDecoderMask2Former(BaseSegmentor):
     """Encoder Decoder segmentors.
 

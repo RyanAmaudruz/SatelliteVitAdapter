@@ -37,7 +37,7 @@ class DiceLoss(nn.Module):
         return loss
 
 
-@DETECTORS.register_module()
+@DETECTORS.register_module(force=True)
 class GroundingDINO(DETR):
 
     def __init__(self, with_aux_loss=False, mul_aux_seg=False, *args, **kwargs):

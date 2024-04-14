@@ -13,6 +13,18 @@ from mmseg.core import DistEvalHook, EvalHook
 from mmseg.datasets import build_dataloader, build_dataset
 from mmseg.utils import get_root_logger
 
+import sys
+
+sys.path.append('./')
+
+from segmentation.mmseg_custom.core.evaluation.eval_hooks_custom import EvalHookNew
+
+
+# from segmentation.mmcv_custom.wandblogger_hook_seg import DistEvalHook
+
+
+# from segmentation.mmseg_custom.models.utils.mm_evaluations import DistEvalHook, EvalHook
+
 
 def init_random_seed(seed=None, device='cuda'):
     """Initialize random seed.
@@ -106,8 +118,8 @@ def train_segmentor(model,
     # build runner
     optimizer = build_optimizer(model, cfg.optimizer)
 
-    if pretrained_keys is None:
-        raise ValueError('No longer supported')
+    # if pretrained_keys is None:
+    #     raise ValueError('No longer supported')
 
     # new_param_groups = []
     # for p in optimizer.param_groups:
@@ -178,7 +190,7 @@ def train_segmentor(model,
             shuffle=False)
         eval_cfg = cfg.get('evaluation', {})
         eval_cfg['by_epoch'] = cfg.runner['type'] != 'IterBasedRunner'
-        eval_hook = DistEvalHook if distributed else EvalHook
+        eval_hook = DistEvalHook if distributed else EvalHookNew
         # In this PR (https://github.com/open-mmlab/mmcv/pull/1193), the
         # priority of IterTimerHook has been modified from 'NORMAL' to 'LOW'.
         runner.register_hook(

@@ -37,7 +37,7 @@ class BaseAssigner(metaclass=ABCMeta):
         pass
 
 
-@MASK_ASSIGNERS.register_module()
+@MASK_ASSIGNERS.register_module(force=True)
 class MaskHungarianAssigner(BaseAssigner):
     """Computes one-to-one matching between predictions and ground truth for
     mask.

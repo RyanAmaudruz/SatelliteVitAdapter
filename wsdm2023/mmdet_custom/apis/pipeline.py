@@ -6,7 +6,7 @@ import json
 import numpy as np
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class RandomFlipWithRefer(RandomFlip):
     # only allow horizontal flip
     def __init__(self, flip_ratio=None):
@@ -24,7 +24,7 @@ class RandomFlipWithRefer(RandomFlip):
         return results
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class LoadRefer:
     def __init__(self, tag='refer') -> None:
         self.tag = tag
@@ -37,7 +37,7 @@ class LoadRefer:
         return results
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class TokenizeRefer:
     def __init__(self, max_sent_len) -> None:
         self.max_sent_len = max_sent_len
@@ -63,7 +63,7 @@ class TokenizeRefer:
         return results
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class RandomParaPhrase:
     def __init__(self, phrase_cache, ratio=0.5) -> None:
         self.ratio = ratio

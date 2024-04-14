@@ -334,7 +334,7 @@ class RelativePositionBias(nn.Module):
         return relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww, Wh*Ww
 
 
-@BACKBONES.register_module()
+@BACKBONES.register_module(force=True)
 class BEiT(nn.Module):
     """Vision Transformer with support for patch or hybrid CNN input stage."""
     def __init__(self, img_size=512, patch_size=16, in_chans=3, num_classes=80,

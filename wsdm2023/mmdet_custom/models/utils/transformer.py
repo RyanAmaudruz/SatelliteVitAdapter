@@ -26,7 +26,7 @@ def build_MLP(input_dim, hidden_dim, output_dim, num_layers):
     return nn.Sequential(*layers)
 
 
-@TRANSFORMER_LAYER_SEQUENCE.register_module()
+@TRANSFORMER_LAYER_SEQUENCE.register_module(force=True)
 class DinoTransformerDecoder(DeformableDetrTransformerDecoder):
 
     def __init__(self, *args, with_rp_noise=False, **kwargs):
@@ -141,7 +141,7 @@ class DinoTransformerDecoder(DeformableDetrTransformerDecoder):
         return output, reference_points
 
 
-@TRANSFORMER.register_module()
+@TRANSFORMER.register_module(force=True)
 class DinoTransformer(DeformableDetrTransformer):
 
     def __init__(self, *args, **kwargs):

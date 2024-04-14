@@ -8,7 +8,7 @@ import numpy as np
 import torch.nn.functional as F
 
 
-@DETECTORS.register_module()
+@DETECTORS.register_module(force=True)
 class HybridTaskCascadeAug(CascadeRCNN):
     """Implementation of `HTC <https://arxiv.org/abs/1901.07518>`_"""
     

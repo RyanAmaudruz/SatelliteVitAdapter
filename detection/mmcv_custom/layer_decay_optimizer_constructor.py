@@ -30,7 +30,7 @@ def get_num_layer_for_vit(var_name, num_max_layer):
         return num_max_layer - 1
 
 
-@OPTIMIZER_BUILDERS.register_module()
+@OPTIMIZER_BUILDERS.register_module(force=True)
 class LayerDecayOptimizerConstructor(DefaultOptimizerConstructor):
     def add_params(self, params, module, prefix='', is_dcn_module=None):
         """Add all parameters of module to the params list.

@@ -12,7 +12,7 @@ import torch
 from mmcv.runner import HOOKS, TextLoggerHook
 
 
-@HOOKS.register_module()
+@HOOKS.register_module(force=True)
 class CustomizedTextLoggerHook(TextLoggerHook):
     """Customized Text Logger hook.
 

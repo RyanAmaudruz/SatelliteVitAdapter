@@ -5,7 +5,7 @@ from mmcv.runner import BaseModule
 from mmdet.models.builder import NECKS
 
 
-@NECKS.register_module()
+@NECKS.register_module(force=True)
 class ChannelMapperWithPooling(BaseModule):
     r"""Channel Mapper to reduce/increase channels of backbone features.
 

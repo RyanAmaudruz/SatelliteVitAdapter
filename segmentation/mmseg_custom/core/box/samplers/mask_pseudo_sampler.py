@@ -9,7 +9,7 @@ from .base_sampler import BaseSampler
 from .mask_sampling_result import MaskSamplingResult
 
 
-@BBOX_SAMPLERS.register_module()
+@BBOX_SAMPLERS.register_module(force=True)
 class MaskPseudoSampler(BaseSampler):
     """A pseudo sampler that does not do sampling actually."""
     def __init__(self, **kwargs):

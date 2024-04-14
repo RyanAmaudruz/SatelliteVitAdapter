@@ -12,7 +12,7 @@ from .deformable_detr_head import DeformableDETRHead
 from mmcv.runner import force_fp32
 
 
-@HEADS.register_module()
+@HEADS.register_module(force=True)
 class DINOHead(DeformableDETRHead):
 
     def __init__(self, *args, dn_cfg=None, **kwargs):

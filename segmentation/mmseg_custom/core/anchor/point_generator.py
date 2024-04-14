@@ -6,7 +6,7 @@ from torch.nn.modules.utils import _pair
 from .builder import PRIOR_GENERATORS
 
 
-@PRIOR_GENERATORS.register_module()
+@PRIOR_GENERATORS.register_module(force=True)
 class PointGenerator:
     def _meshgrid(self, x, y, row_major=True):
         xx = x.repeat(len(y))
@@ -39,7 +39,7 @@ class PointGenerator:
         return valid
 
 
-@PRIOR_GENERATORS.register_module()
+@PRIOR_GENERATORS.register_module(force=True)
 class MlvlPointGenerator:
     """Standard points generator for multi-level (Mlvl) feature maps in 2D
     points-based detectors.

@@ -56,7 +56,7 @@ class Attention(nn.Module):
         return x
 
 
-@NECKS.register_module()
+@NECKS.register_module(force=True)
 class ExtraAttention(BaseModule):
     
     def __init__(self,

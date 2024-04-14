@@ -8,7 +8,7 @@ from mmdet.core.evaluation.bbox_overlaps import bbox_overlaps
 from mmcv.utils import print_log
 
 
-@DATASETS.register_module()
+@DATASETS.register_module(force=True)
 class VGDataset(CustomDataset):
 
     CLASSES = ('target',)

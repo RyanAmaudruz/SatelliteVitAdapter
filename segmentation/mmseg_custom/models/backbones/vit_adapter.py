@@ -18,7 +18,7 @@ from .adapter_modules import SpatialPriorModule, InteractionBlock, deform_inputs
 _logger = logging.getLogger(__name__)
 
 
-@BACKBONES.register_module()
+@BACKBONES.register_module(force=True)
 class ViTAdapter(TIMMVisionTransformer):
     def __init__(self, pretrain_size=224, num_heads=12, conv_inplane=64, n_points=4,
                  deform_num_heads=6, init_values=0., interaction_indexes=None, with_cffn=True,

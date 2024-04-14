@@ -4,7 +4,7 @@ import torch
 from mmseg.datasets.builder import PIPELINES
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class SETR_Resize(object):
     """Resize images & seg.
 
@@ -244,7 +244,7 @@ class SETR_Resize(object):
         return repr_str
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class PadShortSide(object):
     """Pad the image & mask.
 
@@ -307,7 +307,7 @@ class PadShortSide(object):
         return repr_str
 
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class MapillaryHack(object):
     """map MV 65 class to 19 class like Cityscapes."""
     def __init__(self):

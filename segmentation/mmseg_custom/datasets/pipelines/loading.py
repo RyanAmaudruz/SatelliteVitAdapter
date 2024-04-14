@@ -8,7 +8,7 @@ from mmseg.datasets import PIPELINES
 
 import rasterio
 
-# @PIPELINES.register_module()
+# @PIPELINES.register_module(force=True)
 # class LoadImageFromFile(object):
 #     """Load an image from file.
 #
@@ -88,7 +88,7 @@ import rasterio
 #         return repr_str
 #
 #
-# @PIPELINES.register_module()
+# @PIPELINES.register_module(force=True)
 # class LoadAnnotations(object):
 #     """Load annotations for semantic segmentation.
 #
@@ -155,7 +155,7 @@ import rasterio
 #         return repr_str
 #
 #
-# @PIPELINES.register_module()
+# @PIPELINES.register_module(force=True)
 # class LoadAnnotationsGTA(object):
 #     """Load annotations for semantic segmentation.
 #
@@ -215,7 +215,7 @@ import rasterio
 #
 #
 #
-# @PIPELINES.register_module()
+# @PIPELINES.register_module(force=True)
 # class LoadAnnotationsDepth(object):
 #     """Load annotations for semantic segmentation.
 #
@@ -284,7 +284,7 @@ import rasterio
 #         repr_str += f"imdecode_backend='{self.imdecode_backend}')"
 #         return repr_str
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class LoadImageFromFile_MS(object):
     """Load a multispectral tif image from file.
 
@@ -371,7 +371,7 @@ class LoadImageFromFile_MS(object):
         return repr_str
 
 
-# @PIPELINES.register_module()
+# @PIPELINES.register_module(force=True)
 # class LoadAnnotationsNew(object):
 #     """Load annotations for semantic segmentation.
 #
@@ -437,7 +437,7 @@ class LoadImageFromFile_MS(object):
 #         repr_str += f"imdecode_backend='{self.imdecode_backend}')"
 #         return repr_str
 
-@PIPELINES.register_module()
+@PIPELINES.register_module(force=True)
 class AddMissingChannels(object):
     def __init__(self):
         pass
@@ -470,10 +470,3 @@ class AddMissingChannels(object):
             results['img'][:, :, 9:],
         ], 2)
         return results
-
-    def __repr__(self):
-        repr_str = self.__class__.__name__
-        repr_str += f'(reduce_zero_label={self.reduce_zero_label},'
-        repr_str += f"imdecode_backend='{self.imdecode_backend}')"
-        return repr_str
-

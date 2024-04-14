@@ -17,7 +17,7 @@ from ..builder import build_assigner
 from ..utils import get_uncertain_point_coords_with_randomness
 
 
-@HEADS.register_module()
+@HEADS.register_module(force=True)
 class Mask2FormerHead(BaseDecodeHead):
     """Implements the Mask2Former head.
 

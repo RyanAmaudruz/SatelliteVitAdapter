@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from ..builder import MATCH_COST
 
 
-@MATCH_COST.register_module()
+@MATCH_COST.register_module(force=True)
 class FocalLossCost:
     """FocalLossCost.
 
@@ -54,7 +54,7 @@ class FocalLossCost:
         return cls_cost * self.weight
 
 
-@MATCH_COST.register_module()
+@MATCH_COST.register_module(force=True)
 class MaskFocalLossCost(FocalLossCost):
     """Cost of mask assignments based on focal losses.
 
@@ -89,7 +89,7 @@ class MaskFocalLossCost(FocalLossCost):
         return cls_cost / hw * self.weight
 
 
-@MATCH_COST.register_module()
+@MATCH_COST.register_module(force=True)
 class ClassificationCost:
     """ClsSoftmaxCost.Borrow from
     mmdet.core.bbox.match_costs.match_cost.ClassificationCost.
@@ -131,7 +131,7 @@ class ClassificationCost:
         return cls_cost * self.weight
 
 
-@MATCH_COST.register_module()
+@MATCH_COST.register_module(force=True)
 class DiceCost:
     """Cost of mask assignments based on dice losses.
 
