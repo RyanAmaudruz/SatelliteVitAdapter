@@ -242,9 +242,17 @@ def main():
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_12-31_ckpt0_vit_adapter_online_network.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240411-123334_vit.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240412-220347_cp9_vit.pth'
-    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240413-132627_cp29_vit.pth'
-
-
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240413-132627_cp29_vit.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240414-145746_cp19_vit.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240414-145746_cp19_vit.pth'
+    # pretrained_weights = '/gpfs/home2/ramaudruz/detcon-pytorch/detcon/odin_checkpoint_1000.pth'
+    # pretrained_weights = f'/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/dino_v2/starting/checkpoint0000.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/run_2024-04-18_22-26_ckp2_MODIFIED_vit_adapter.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/B13_vits16_dino_0099__modified.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240419-002419_cp24_vit.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240421-164828_cp49_vit.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/cribo_first_student3.pth'
+    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/distillation_l2_normalised_0099_modified.pth'
 
 
     if pre_args.load_from is not None:
