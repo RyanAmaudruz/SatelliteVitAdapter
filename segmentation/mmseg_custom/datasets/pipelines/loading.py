@@ -2,6 +2,7 @@ import os.path as osp
 
 import mmcv
 import numpy as np
+import torch
 from cv2 import imread
 import tifffile
 from mmseg.datasets import PIPELINES
@@ -554,7 +555,7 @@ class AddMissingChannels_mados(object):
         zeros = np.zeros((h, w, 2), dtype=results['img'].dtype)
 
         results['img'] = np.concatenate([
-            results['img'][:, :, :9],
+            results['img'][:, :, :9], # ????????? :10
             zeros,
             results['img'][:, :, 9:],
         ], 2)
@@ -564,7 +565,12 @@ class AddMissingChannels_mados(object):
 @PIPELINES.register_module(force=True)
 class AddMissingChannels_segmunich(object):
     def __init__(self):
-        pass
+        segmunich_mean = np.array([433.42862487,  661.45282276,  556.69607076, 2767.70639062, 1017.49372153,
+                                   2246.94687676, 2677.20484342, 2889.12748883, 1702.10331642, 1022.95482039])
+
+        s2c_mean = np.array([1605.57504906, 1390.78157673, 1314.8729939, 1363.52445545, 1549.44374991, 2091.74883118, 2371.7172463, 2560.29504086, 2177.07172323, 1524.06546312]
+                            )
+        self.ratio = (s2c_mean / segmunich_mean).reshape(1, 1, -1)
 
     def __call__(self, results):
         """Call function to load multiple types annotations.
@@ -577,7 +583,7 @@ class AddMissingChannels_segmunich(object):
         """
         h, w = results['img'].shape[:2]
 
-        results['img'] = results['img'].astype('float32') / 10000
+        results['img'] = results['img'] / 10000
 
         # bands_mean = [0.0582676,  0.05223386, 0.04381474, 0.0357083,  0.03412902, 0.03680401,
         #               0.03999107, 0.03566642, 0.03965081, 0.0267993,  0.01978944]
@@ -588,15 +594,15 @@ class AddMissingChannels_segmunich(object):
         #
         # results['img'][cond] = impute_nan[cond]
 
-        zeros_1 = np.zeros((h, w, 1), dtype=results['img'].dtype)
-
-        zeros_2 = np.zeros((h, w, 2), dtype=results['img'].dtype)
+        results['img'] *= self.ratio
+        fillin_1 = np.ones((h, w, 1), dtype=results['img'].dtype) * 0.23
+        fillin_2 = np.ones((h, w, 2), dtype=results['img'].dtype) * np.array([0.083, 0.0022]).reshape(1, 1, -1)
 
         results['img'] = np.concatenate([
             results['img'][:, :, :7],
-            zeros_1,
+            fillin_1,
             results['img'][:, :, 7:8],
-            zeros_2,
+            fillin_2,
             results['img'][:, :, 8:],
-        ], 2)
+        ], 2).astype('float32')
         return results

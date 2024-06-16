@@ -105,7 +105,20 @@ for i, f in enumerate(os.listdir(data_dir)):
 
 print(all_targets)
 
+stat_tracker = None
 
+all_targets = {}
+data_dir = '/gpfs/work5/0/prjs0790/data/segmunich_new/TUM_128/latest/img_dir/train/'
+for i, f in enumerate(os.listdir(data_dir)):
+    target = tifffile.imread(data_dir + f)
+
+    if i == 0:
+        stat_tracker = target.mean((0, 1))
+    else:
+        stat_tracker = (i * stat_tracker + target.mean((0, 1))) / (i + 1)
+    print(stat_tracker)
+
+    i
 
 
 
