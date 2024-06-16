@@ -1,6 +1,6 @@
 # model_cfg
-num_things_classes = 100
-num_stuff_classes = 50
+num_things_classes = 5
+num_stuff_classes = 20
 num_classes = num_things_classes + num_stuff_classes
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 model = dict(
@@ -122,11 +122,11 @@ model = dict(
                 type='DiceCost', weight=5.0, pred_act=True, eps=1.0)),
         sampler=dict(type='MaskPseudoSampler')),
     test_cfg=dict(
-        panoptic_on=True,
+        panoptic_on=False,
         # For now, the dataset does not support
         # evaluating semantic segmentation metric.
-        semantic_on=False,
-        instance_on=True,
+        semantic_on=True,
+        instance_on=False,
         # max_per_image is for instance segmentation.
         max_per_image=100,
         iou_thr=0.8,

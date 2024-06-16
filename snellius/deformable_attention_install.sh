@@ -10,6 +10,8 @@ source activate vit_adapt
 srun sh make.sh
 
 
+
+
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

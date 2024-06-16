@@ -107,9 +107,12 @@ class FakeArgs:
     # config = '/gpfs/home2/ramaudruz/RSI-Segmentation/configs/segmenter/segmenter_vit-s_mask_8x1_512x512_160k_dfc2020.py'
     # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
     # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c_double_res.py'
-    config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
     # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
     # config = '/gpfs/home2/ramaudruz/RSI-Segmentation/configs/segmenter/segmenter_vit-s_mask_8x1_512x512_160k_dfc2020_odin.py'
+    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
+    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/mask2former_deit_adapter_small_512_160k_mados.py'
+    config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_segmunich.py'
+
     cfg_options = None
     work_dir = None
     load_from = None
@@ -219,7 +222,7 @@ def main():
     model.init_weights()
 
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/run_2024-03-21_18-59_ckp4_MODIFIED_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_s2c_new_transform_ckp95_MODIFIED_vit_adapter.pth'
+    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_s2c_new_transform_ckp95_MODIFIED_vit_adapter.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-27_07-53_ckpt2_vit_adapter.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-27_12-43_ckpt1_vit_adapter.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-25_18-26_ckpt4_vit_adapter.pth'
@@ -252,7 +255,7 @@ def main():
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240419-002419_cp24_vit.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240421-164828_cp49_vit.pth'
     # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/cribo_first_student3.pth'
-    pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/distillation_l2_normalised_0099_modified.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/distillation_l2_normalised_0099_modified.pth'
 
 
     if pre_args.load_from is not None:
@@ -309,10 +312,10 @@ def main():
 
     params_w_existing_weights = set([n for n, _ in model.named_parameters()]) - set(msg.missing_keys)
 
-    for n, p in model.named_parameters():
-        if n in params_w_existing_weights:
-            print(f'Setting no gradients for {n}')
-            p.requires_grad =  False
+    # for n, p in model.named_parameters():
+    #     if n in params_w_existing_weights:
+    #         print(f'Setting no gradients for {n}')
+    #         p.requires_grad =  False
 
     # cfg_copy = copy.deepcopy(cfg)
 

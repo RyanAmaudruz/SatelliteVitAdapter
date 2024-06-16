@@ -5,6 +5,8 @@ from mmseg.datasets.builder import PIPELINES
 from mmseg.datasets.pipelines.formatting import to_tensor
 
 
+
+
 @PIPELINES.register_module(force=True)
 class DefaultFormatBundle(object):
     """Default formatting bundle.
@@ -32,7 +34,11 @@ class DefaultFormatBundle(object):
             if len(img.shape) < 3:
                 img = np.expand_dims(img, -1)
             img = np.ascontiguousarray(img.transpose(2, 0, 1))
-            results['img'] = DC(to_tensor(img), stack=True)
+            try:
+                results['img'] = DC(to_tensor(img), stack=True)
+            except TypeError:
+                results['img'] = DC(to_tensor(img.astype('int32')), stack=True)
+
         if 'gt_semantic_seg' in results:
             # convert to long
             results['gt_semantic_seg'] = DC(to_tensor(

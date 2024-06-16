@@ -1,6 +1,7 @@
 # Copyright (c) Shanghai AI Lab. All rights reserved.
 _base_ = [
-    '../_base_/models/upernet_r50.py',
+    '../_base_/models/mask2former_beit.py',
+    # '../_base_/models/upernet_r50.py',
     # '../_base_/datasets/dfc2020.py',
     '../_base_/datasets/mados.py',
     '../_base_/default_runtime.py',
@@ -32,8 +33,75 @@ model = dict(
         interaction_indexes=[[0, 2], [3, 5], [6, 8], [9, 11]],
         window_attn=[False] * 12,
         window_size=[None] * 12),
-    decode_head=dict(num_classes=15, in_channels=[384, 384, 384, 384]),
-    auxiliary_head=dict(num_classes=15, in_channels=384),
+    decode_head=dict(
+        in_channels=[384, 384, 384, 384],
+        feat_channels=256,
+        out_channels=256,
+        num_queries=100,
+        pixel_decoder=dict(
+            type='MSDeformAttnPixelDecoder',
+            num_outs=3,
+            norm_cfg=dict(type='GN', num_groups=32),
+            act_cfg=dict(type='ReLU'),
+            encoder=dict(
+                type='DetrTransformerEncoder',
+                num_layers=6,
+                transformerlayers=dict(
+                    type='BaseTransformerLayer',
+                    attn_cfgs=dict(
+                        type='MultiScaleDeformableAttention',
+                        embed_dims=256,
+                        num_heads=8,
+                        num_levels=3,
+                        num_points=4,
+                        im2col_step=64,
+                        dropout=0.0,
+                        batch_first=False,
+                        norm_cfg=None,
+                        init_cfg=None),
+                    ffn_cfgs=dict(
+                        type='FFN',
+                        embed_dims=256,
+                        feedforward_channels=1024,
+                        num_fcs=2,
+                        ffn_drop=0.0,
+                        with_cp=True,  # set with_cp=True to save memory
+                        act_cfg=dict(type='ReLU', inplace=True)),
+                    operation_order=('self_attn', 'norm', 'ffn', 'norm')),
+                init_cfg=None),
+            positional_encoding=dict(
+                type='SinePositionalEncoding', num_feats=128, normalize=True),
+            init_cfg=None),
+        positional_encoding=dict(
+            type='SinePositionalEncoding', num_feats=128, normalize=True),
+        transformer_decoder=dict(
+            type='DetrTransformerDecoder',
+            return_intermediate=True,
+            num_layers=9,
+            transformerlayers=dict(
+                type='DetrTransformerDecoderLayer',
+                attn_cfgs=dict(
+                    type='MultiheadAttention',
+                    embed_dims=256,
+                    num_heads=8,
+                    attn_drop=0.0,
+                    proj_drop=0.0,
+                    dropout_layer=None,
+                    batch_first=False),
+                ffn_cfgs=dict(
+                    embed_dims=256,
+                    feedforward_channels=2048,
+                    num_fcs=2,
+                    act_cfg=dict(type='ReLU', inplace=True),
+                    ffn_drop=0.0,
+                    dropout_layer=None,
+                    with_cp=True,  # set with_cp=True to save memory
+                    add_identity=True),
+                feedforward_channels=2048,
+                operation_order=('cross_attn', 'norm', 'self_attn', 'norm',
+                                 'ffn', 'norm')),
+            init_cfg=None)
+    ),
     test_cfg=dict(mode='slide', crop_size=(512, 512), stride=(341, 341))
 )
 # img_norm_cfg = dict(
@@ -61,7 +129,7 @@ img_norm_cfg = dict(
          0.05884482, 0.05545856, 0.06423746, 0.04211187, 0.03019115], to_rgb=False)
 crop_size = (256, 256)
 train_pipeline = [
-    dict(type='LoadImageFromFile_MS_mados'),
+    dict(type='LoadImageFromFile_MS'),
     # dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='LoadAnnotations', reduce_zero_label=False),
     dict(type='Resize', img_scale=(256, 256), ratio_range=(0.5, 2.0)),
@@ -69,13 +137,14 @@ train_pipeline = [
     dict(type='RandomFlip', prob=0.5),
     #dict(type='PhotoMetricDistortion'),
     # dict(type='Normalize', **img_norm_cfg),
-    dict(type='AddMissingChannels_mados'),
+    dict(type='AddMissingChannels'),
     dict(type='Pad', size=crop_size, pad_val=0, seg_pad_val=255),
+    dict(type='ToMask'),
     dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'gt_semantic_seg']),
+    dict(type='Collect', keys=['img', 'gt_semantic_seg', 'gt_masks', 'gt_labels']),
 ]
 test_pipeline = [
-    dict(type='LoadImageFromFile_MS_mados'),
+    dict(type='LoadImageFromFile_MS'),
     dict(
         type='MultiScaleFlipAug',
         img_scale=(256, 256),
@@ -85,7 +154,7 @@ test_pipeline = [
             dict(type='Resize', keep_ratio=True),
             dict(type='RandomFlip'),
             # dict(type='Normalize', **img_norm_cfg),
-            dict(type='AddMissingChannels_mados'),
+            dict(type='AddMissingChannels'),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
         ])
