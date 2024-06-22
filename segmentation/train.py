@@ -120,7 +120,7 @@ class FakeArgs:
     config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
 
     cfg_options = None
-    work_dir = '/var/node433/local/ryan_a/data/dfc2020_vit_adapter/B13_vits16_dino_0099'
+    work_dir = '/var/node433/local/ryan_a/data/dfc2020_vit_adapter/ssl_s2c_new_transforms'
     # work_dir = '/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/test'
     load_from = None
     resume_from = None
@@ -140,6 +140,9 @@ def main():
     pre_args = parse_args()
 
     args = FakeArgs()
+
+    # pretrained_weights = '/var/node433/local/ryan_a/data/old_checkpoints/B13_vits16_dino_0099_ckpt.pth'
+    pretrained_weights = '/var/node433/local/ryan_a/data/ssl4eo_ssl/ssl4eo_ssl/ssl_s2c_new_transforms/checkpoint.pth'
 
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
@@ -227,8 +230,6 @@ def main():
         train_cfg=cfg.get('train_cfg'),
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
-
-    pretrained_weights = '/var/node433/local/ryan_a/data/old_checkpoints/B13_vits16_dino_0099_ckpt.pth'
 
     if pre_args.load_from is not None:
         state_dict = torch.load(pre_args.load_from, map_location="cpu")
