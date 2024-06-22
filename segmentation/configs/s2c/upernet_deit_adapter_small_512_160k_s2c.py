@@ -87,13 +87,17 @@ test_pipeline = [
 optimizer = dict(_delete_=True, type='AdamW', lr=6e-5, betas=(0.9, 0.999), weight_decay=0.01,
                  constructor='LayerDecayOptimizerConstructor',
                  paramwise_cfg=dict(num_layers=12, layer_decay_rate=0.95))
+# optim_wrapper = dict(type='AmpOptimWrapper', optimizer=optimizer, accumulative_counts=2)
 lr_config = dict(_delete_=True, policy='poly',
                  warmup='linear',
                  warmup_iters=1500,
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 8 GPUs with 2 images per GPU
-data=dict(samples_per_gpu=60,
+data=dict(
+    # samples_per_gpu=60,
+    # samples_per_gpu=15,
+    samples_per_gpu=12,
           val=dict(pipeline=test_pipeline),
           test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')

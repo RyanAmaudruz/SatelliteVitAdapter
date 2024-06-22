@@ -84,7 +84,10 @@ import numpy as np
 
 
 all_targets = {}
-data_dir = '/gpfs/work5/0/prjs0790/data/segmunich_new/TUM_128/latest/ann_dir/train/'
+# data_dir = '/gpfs/work5/0/prjs0790/data/segmunich_new/TUM_128/latest/ann_dir/train/'
+# data_dir = '/var/node433/local/ryan_a/data/dfc2020_mmseg/ann_dir/train/'
+data_dir = '/gpfs/work5/0/prjs0790/data/grss/dfc2020_mmseg/ann_dir/train/'
+
 for i, f in enumerate(os.listdir(data_dir)):
     target = tifffile.imread(data_dir + f)
     # all_targets += list(target.flatten())
@@ -96,11 +99,11 @@ for i, f in enumerate(os.listdir(data_dir)):
         else:
             all_targets[k] = v
 
-    if i % 100 == 0:
+    if i % 100 == 0 and i != 0:
         print(i)
-        temp_sum = sum(v for v in all_targets.values())
+        temp_sum = sum([v for k, v in all_targets.items() if k != 0])
         all_targets_ratio = {k: v/temp_sum for k, v in all_targets.items()}
-        print(all_targets_ratio)
+        print(dict(sorted(all_targets_ratio.items())))
 
 
 print(all_targets)
@@ -118,7 +121,8 @@ for i, f in enumerate(os.listdir(data_dir)):
         stat_tracker = (i * stat_tracker + target.mean((0, 1))) / (i + 1)
     print(stat_tracker)
 
-    i
+
+
 
 
 

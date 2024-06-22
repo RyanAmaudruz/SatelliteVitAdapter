@@ -12,7 +12,7 @@ class EvalHookNew(EvalHook):
         self.data_list = []
         timestamp = datetime.datetime.now().__str__().split('.')[0][:-3].replace(' ', '_').replace(':', '-')
         print(f'Timestamp: {timestamp}')
-        self.data_log_dir = f'/gpfs/work5/0/prjs0790/data/run_outputs/evaluation/vitada_run_{timestamp}/'
+        self.data_log_dir = f'/var/node433/local/ryan_a/new_data/vit_adapt_cache/vit_ada_run_{timestamp}/'
         os.makedirs(self.data_log_dir)
     def _do_evaluate(self, runner):
         """perform evaluation and save ckpt."""

@@ -27,7 +27,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile_MS_segmunich'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(128, 128),
+        img_scale=(256, 256),
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
         flip=False,
         transforms=[

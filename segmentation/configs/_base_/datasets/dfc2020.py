@@ -1,6 +1,7 @@
 # dataset settings
 dataset_type = 'DFC2020Dataset'
-data_root = '/gpfs/work5/0/prjs0790/data/grss/dfc2020_mmseg'
+# data_root = '/gpfs/work5/0/prjs0790/data/grss/dfc2020_mmseg'
+data_root = '/var/node433/local/ryan_a/data/dfc2020_mmseg'
 img_norm_cfg = dict(
     mean=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0], std=[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000], to_rgb=False)
 crop_size = (256, 256)
