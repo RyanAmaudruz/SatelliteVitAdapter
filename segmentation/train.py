@@ -228,42 +228,6 @@ def main():
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
 
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/run_2024-03-21_18-59_ckp4_MODIFIED_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_s2c_new_transform_ckp95_MODIFIED_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-27_07-53_ckpt2_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-27_12-43_ckpt1_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-25_18-26_ckpt4_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-28_19-33_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-29_09-06_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_run_2024-03-29_17-44_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-30_10-18_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-30_13-27_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_15-25_ckpt0_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_17-17_ckpt0_vit_adapter.pth'
-
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_17-17_ckpt0_vit_adapter_ema_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_17-17_ckpt0_vit_adapter_online_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-03-31_19-44_ckpt0_vit_adapter_online_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-01_15-54_ckpt4_vit_adapter_ema_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-02_10-01_ckpt3_vit_adapter_ema_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_08-14_ckpt0_vit_adapter_online_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/s2c_new_transforms_ck95_teacher_for_vit_adapt.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_08-14_ckpt2_vit_adapter_online_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/ssl4eo_odin_run_2024-04-06_12-31_ckpt0_vit_adapter_online_network.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240411-123334_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240412-220347_cp9_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240413-132627_cp29_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240414-145746_cp19_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240414-145746_cp19_vit.pth'
-    # pretrained_weights = '/gpfs/home2/ramaudruz/detcon-pytorch/detcon/odin_checkpoint_1000.pth'
-    # pretrained_weights = f'/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/dino_v2/starting/checkpoint0000.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/run_2024-04-18_22-26_ckp2_MODIFIED_vit_adapter.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/B13_vits16_dino_0099__modified.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240419-002419_cp24_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/leopart-20240421-164828_cp49_vit.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/cribo_first_student3.pth'
-    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/modified_checkpoints/distillation_l2_normalised_0099_modified.pth'
-
     pretrained_weights = '/var/node433/local/ryan_a/data/old_checkpoints/B13_vits16_dino_0099_ckpt.pth'
 
     if pre_args.load_from is not None:
@@ -279,16 +243,12 @@ def main():
     print(f'Pretrained weights: {pretrained_weights}')
     print(f'Missing keys: {msg.missing_keys}')
     print(f'Unexpected keys: {msg.unexpected_keys}')
+    print(f'Pretrained weights count: {len(pretrained_weights)}')
+    print(f'Missing keys count: {len(msg.missing_keys)}')
+    print(f'Unexpected keys count: {len(msg.unexpected_keys)}')
 
     if len(msg.missing_keys) > 322:
         raise ValueError('Too many missing key. Check the pretrained weight keys! Aborting!')
-
-    print(f'Pretrained weights: {len(pretrained_weights)}')
-    print(f'Missing keys: {len(msg.missing_keys)}')
-    print(f'Unexpected keys: {len(msg.unexpected_keys)}')
-
-    # logger.info(f'Missing keys: {msg.missing_keys}')
-    # logger.info(f'Unexpected keys: {msg.unexpected_keys}')
 
     # SyncBN is not support for DP
     if not distributed:
@@ -322,22 +282,13 @@ def main():
         dict(type='TextLoggerHook'),
         dict(type='WandbHookSeg',
              init_kwargs={'project': 'ViT-Adapter'})
-             # interval=10,
-             # log_checkpoint=True,
-             # log_checkpoint_metadata=True,
-             # num_eval_images=100)
     ]
 
-    params_w_existing_weights = set([n for n, _ in model.named_parameters()]) - set(msg.missing_keys)
-
+    # params_w_existing_weights = set([n for n, _ in model.named_parameters()]) - set(msg.missing_keys)
     # for n, p in model.named_parameters():
     #     if n in params_w_existing_weights:
     #         print(f'Setting no gradients for {n}')
     #         p.requires_grad =  False
-
-    # cfg_copy = copy.deepcopy(cfg)
-
-    # pretrained_keys = set(state_dict.keys()) - set(msg.unexpected_keys)
 
     pretrained_keys = None
 
@@ -351,18 +302,6 @@ def main():
         meta=meta,
         pretrained_keys=pretrained_keys,
     )
-
-    # for n, p in model.named_parameters():
-    #     p.requires_grad =  True
-    #
-    # train_segmentor(
-    #     model,
-    #     datasets,
-    #     cfg_copy,
-    #     distributed=distributed,
-    #     validate=(not args.no_validate),
-    #     timestamp=timestamp,
-    #     meta=meta)
 
 
 if __name__ == '__main__':

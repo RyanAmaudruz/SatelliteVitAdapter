@@ -36,24 +36,6 @@ model = dict(
     auxiliary_head=dict(num_classes=8, in_channels=384),
     test_cfg=dict(mode='slide', crop_size=(512, 512), stride=(341, 341))
 )
-# img_norm_cfg = dict(
-#     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-# test_pipeline = [
-#     dict(type='LoadImageFromFile'),
-#     dict(
-#         type='MultiScaleFlipAug',
-#         img_scale=(2048, 512),
-#         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
-#         flip=False,
-#         transforms=[
-#             dict(type='Resize', keep_ratio=True),
-#             dict(type='ResizeToMultiple', size_divisor=32),
-#             dict(type='RandomFlip'),
-#             dict(type='Normalize', **img_norm_cfg),
-#             dict(type='ImageToTensor', keys=['img']),
-#             dict(type='Collect', keys=['img']),
-#         ])
-# ]
 img_norm_cfg = dict(
     mean=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0], std=[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000], to_rgb=False)
 crop_size = (256, 256)
@@ -96,7 +78,6 @@ lr_config = dict(_delete_=True, policy='poly',
 # By default, models are trained on 8 GPUs with 2 images per GPU
 data=dict(
     # samples_per_gpu=60,
-    # samples_per_gpu=15,
     samples_per_gpu=12,
           val=dict(pipeline=test_pipeline),
           test=dict(pipeline=test_pipeline))
