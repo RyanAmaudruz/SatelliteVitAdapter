@@ -9,4 +9,7 @@ source activate vit_adapt
 
 srun python segmentation/train.py
 
+#srun python segmentation/train.py \
+#--load_from "/var/node433/local/ryan_a/data/leo_missing/leo_new_queue/ckp-epoch=14_mod.ckpt" \
+#--work_dir "/var/node433/local/ryan_a/data/dfc2020_vit_adapter/leo_new_queue_e14"
 

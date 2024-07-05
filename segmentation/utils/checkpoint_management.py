@@ -33,7 +33,7 @@ def prepare_weights_for_vit_adapt(state_dict, model_key):
         if 'state_dict' in state_dict:
             state_dict = state_dict['state_dict']
         state_dict = {
-            k
+            k.replace(rel_key, 'backbone.')
             # .replace(rel_key, '')
             # .replace('.proj.', '.projection.')
             # .replace('blocks.', 'layers.')
@@ -51,7 +51,7 @@ def prepare_weights_for_vit_adapt(state_dict, model_key):
         if 'state_dict' in state_dict:
             state_dict = state_dict['state_dict']
         state_dict = {
-            k
+            k.replace(rel_key, 'backbone.')
             # .replace(rel_key, '')
             # .replace('.proj.', '.projection.')
             # .replace('blocks.', 'layers.')

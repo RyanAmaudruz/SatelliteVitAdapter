@@ -36,7 +36,12 @@ def parse_args():
     # parser.add_argument('config', help='train config file path')
     # parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
-        '--load-from', help='the checkpoint file to load weights from', default=None)
+        '--load_from', help='the checkpoint file to load weights from', default=None
+    )
+    parser.add_argument(
+        '--work_dir', help='the working directory to store files in', default=None
+    )
+
     # parser.add_argument(
     #     '--resume-from', help='the checkpoint file to resume from')
     # parser.add_argument(
@@ -108,20 +113,12 @@ def parse_args():
     return args
 
 class FakeArgs:
-    # config = '/gpfs/home2/ramaudruz/RSI-Segmentation/configs/segmenter/segmenter_vit-s_mask_8x1_512x512_160k_dfc2020.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c_double_res.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
-    # config = '/gpfs/home2/ramaudruz/RSI-Segmentation/configs/segmenter/segmenter_vit-s_mask_8x1_512x512_160k_dfc2020_odin.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/mask2former_deit_adapter_small_512_160k_mados.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_segmunich.py'
-    # config = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_segmunich.py'
     config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
-
+    # config = None
     cfg_options = None
-    work_dir = '/var/node433/local/ryan_a/data/dfc2020_vit_adapter/ssl_s2c_new_transforms'
+    work_dir = "/var/node433/local/ryan_a/data/dfc2020_vit_adapter/distillation_l2_normalised"
     # work_dir = '/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/test'
+    # work_dir = None
     load_from = None
     resume_from = None
     gpu = 0
@@ -142,7 +139,12 @@ def main():
     args = FakeArgs()
 
     # pretrained_weights = '/var/node433/local/ryan_a/data/old_checkpoints/B13_vits16_dino_0099_ckpt.pth'
-    pretrained_weights = '/var/node433/local/ryan_a/data/ssl4eo_ssl/ssl4eo_ssl/ssl_s2c_new_transforms/checkpoint.pth'
+    # pretrained_weights = '/var/node433/local/ryan_a/data/ssl4eo_ssl/ssl4eo_ssl/ssl_s2c_new_transforms/checkpoint.pth'
+    # pretrained_weights = '/var/node433/local/ryan_a/data/leo_missing/new_queue-with_dino_loss/20240419-002419_ckp-epoch=24_mod.ckpt'
+    # pretrained_weights = '/var/node433/local/ryan_a/data/leo_missing/leopart_new_transform_leopart-20240221-081849/ckp-epoch=09_mod.ckpt'
+    # pretrained_weights = '/var/node433/local/ryan_a/data/odin_missing_runs/transform_fixed-mixed_aug-w_local_negs/2024-04-06_12-31_ckp-epoch=04.ckpt'
+    pretrained_weights = '/var/node433/local/ryan_a/data/ssl4eo_ssl/ssl4eo_ssl/distillation_l2_normalised/checkpoint.pth'
+
 
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
@@ -244,7 +246,7 @@ def main():
     print(f'Pretrained weights: {pretrained_weights}')
     print(f'Missing keys: {msg.missing_keys}')
     print(f'Unexpected keys: {msg.unexpected_keys}')
-    print(f'Pretrained weights count: {len(pretrained_weights)}')
+    # print(f'Pretrained weights count: {len(pretrained_weights)}')
     print(f'Missing keys count: {len(msg.missing_keys)}')
     print(f'Unexpected keys count: {len(msg.unexpected_keys)}')
 
