@@ -113,10 +113,10 @@ def parse_args():
     return args
 
 class FakeArgs:
-    config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
+    config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
     # config = None
     cfg_options = None
-    work_dir = "/var/node433/local/ryan_a/data/dfc2020_vit_adapter/distillation_l2_normalised"
+    work_dir = "/var/node433/local/ryan_a/data/mados_fine_tuning/transform_fixed-mixed_aug_e04"
     # work_dir = '/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/test'
     # work_dir = None
     load_from = None
@@ -143,7 +143,9 @@ def main():
     # pretrained_weights = '/var/node433/local/ryan_a/data/leo_missing/new_queue-with_dino_loss/20240419-002419_ckp-epoch=24_mod.ckpt'
     # pretrained_weights = '/var/node433/local/ryan_a/data/leo_missing/leopart_new_transform_leopart-20240221-081849/ckp-epoch=09_mod.ckpt'
     # pretrained_weights = '/var/node433/local/ryan_a/data/odin_missing_runs/transform_fixed-mixed_aug-w_local_negs/2024-04-06_12-31_ckp-epoch=04.ckpt'
-    pretrained_weights = '/var/node433/local/ryan_a/data/ssl4eo_ssl/ssl4eo_ssl/distillation_l2_normalised/checkpoint.pth'
+    # pretrained_weights = '/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/ssl4eo_ssl/distillation_l2_normalised/checkpoint.pth'
+    # pretrained_weights = '/var/node433/local/ryan_a/data/leo_missing/leo_new_queue/ckp-epoch=24_mod.ckpt'
+    pretrained_weights = '/var/node433/local/ryan_a/data/odin_missing_runs/transform_fixed-mixed_aug/2024-04-06_08-14_ckp-epoch=04.ckpt'
 
 
     cfg = Config.fromfile(args.config)

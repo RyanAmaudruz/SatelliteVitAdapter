@@ -83,7 +83,7 @@ test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
+            # dict(type='RandomFlip'),
             # dict(type='Normalize', **img_norm_cfg),
             dict(type='AddMissingChannels_mados'),
             dict(type='ImageToTensor', keys=['img']),
@@ -100,7 +100,7 @@ lr_config = dict(_delete_=True, policy='poly',
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 8 GPUs with 2 images per GPU
-data=dict(samples_per_gpu=50,
+data=dict(samples_per_gpu=24,
           val=dict(pipeline=test_pipeline),
           test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')

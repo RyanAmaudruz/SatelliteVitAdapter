@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'madosDataset'
-data_root = '/gpfs/work5/0/prjs0790/data/mados/mados_mmseg'
+data_root = '/var/node433/local/ryan_a/data/mados/mados_mmseg'
 # img_norm_cfg = dict(
 #     mean=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0], std=[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000], to_rgb=False)
 
@@ -9,11 +9,11 @@ img_norm_cfg = dict(
           0.03999107, 0.03566642, 0.03965081, 0.0267993,  0.01978944],
     std=[0.03240627, 0.03432253, 0.0354812,  0.0375769,  0.03785412, 0.04992323,
          0.05884482, 0.05545856, 0.06423746, 0.04211187, 0.03019115], to_rgb=False)
-crop_size = (240, 240)
+crop_size = (256, 256)
 train_pipeline = [
     dict(type='LoadImageFromFile_MS_mados'),
     dict(type='LoadAnnotations',reduce_zero_label=True),
-    dict(type='Resize', img_scale=(240, 240), ratio_range=(0.5, 2.0)),
+    dict(type='Resize', img_scale=(256, 256), ratio_range=(0.5, 2.0)),
     dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     #dict(type='PhotoMetricDistortion'),
@@ -27,7 +27,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile_MS_mados'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(240, 240),
+        img_scale=(256, 256),
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
         flip=False,
         transforms=[

@@ -25,6 +25,7 @@ import numpy as np
 import tifffile
 from tqdm import tqdm
 from os.path import dirname as up
+sys.path.append('./')
 
 import torch
 from torch.utils.data import DataLoader
@@ -42,7 +43,10 @@ from segmentation.utils.metrics import Evaluation, confusion_matrix
 from segmentation.utils.test_time_aug import TTA
 
 
+
+
 # sys.path.append(up(os.path.abspath(__file__)))
+
 # # from marinext_wrapper import MariNext
 #
 # sys.path.append(os.path.join(up(up(os.path.abspath(__file__))), 'utils'))
@@ -219,7 +223,7 @@ def main(options, cfg):
     #                             batch_size = options['batch'],
     #                             shuffle = False)
 
-    val_dataset = build_dataset(cfg.data.val, dict(test_mode=True))
+    val_dataset = build_dataset(cfg.data.test, dict(test_mode=True))
 
     val_dataloader = build_dataloader(
         val_dataset,
@@ -258,7 +262,12 @@ def main(options, cfg):
 
     # Load model from specific epoch to continue the training or start the evaluation
 
-    model_file = '/gpfs/work5/0/prjs0790/data/first_model_mados/upernet_deit_adapter_small_512_160k_mados/best_mIoU_iter_5000.pth'
+    # model_file = '/gpfs/work5/0/prjs0790/data/first_model_mados/upernet_deit_adapter_small_512_160k_mados/best_mIoU_iter_5000.pth'
+    # model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/leo_new_trans_e09/best_mIoU_iter_33000.pth'
+    # model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/new_queue-with_dino_loss_e04/best_mIoU_iter_34000.pth'
+    model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/new_queue-with_dino_loss_e14/best_mIoU_iter_38000.pth'
+
+    print(model_file)
 
     checkpoint = torch.load(model_file, map_location = 'cpu')
 
@@ -305,7 +314,7 @@ def main(options, cfg):
 
         crop_name = '_'.join(d['img_metas'][0].data[0][0]['ori_filename'].split('_')[:-1])
 
-        target = tifffile.tifffile.imread(f'/gpfs/work5/0/prjs0790/data/mados/mados_mmseg/ann_dir/{mode}/{crop_name}_ann.tif')
+        target = tifffile.tifffile.imread(f'/var/node433/local/ryan_a/data/mados/mados_mmseg/ann_dir/{mode}/{crop_name}_ann.tif')
         target -= 1
         cond = target == -1
         target[cond] = 255
@@ -348,8 +357,10 @@ def main(options, cfg):
 
 
 class FakeArgs:
-    path = '/gpfs/work5/0/prjs0790/data/mados/MADOS'
-    model_path = '/gpfs/work5/0/prjs0790/data/mados_models/1'
+    # path = '/gpfs/work5/0/prjs0790/data/mados/MADOS'
+    # model_path = '/gpfs/work5/0/prjs0790/data/mados_models/1'
+    path = '/var/node433/local/ryan_a/data/mados/MADOS'
+    model_path = '/var/node433/local/ryan_a/data/mados_models/1'
     split = 'test'
     test_time_augmentations = True
     batch = 1
@@ -390,7 +401,7 @@ if __name__ == "__main__":
     # options = vars(args)  # convert to ordinary dict
     options = {k: getattr(args, k) for k in dir(args) if not k.startswith('_')}
 
-    config_path = '/gpfs/home2/ramaudruz/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
+    config_path = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
     cfg = Config.fromfile(config_path)
 
     main(options, cfg)
