@@ -113,10 +113,12 @@ def parse_args():
     return args
 
 class FakeArgs:
-    config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
+    # config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_mados.py'
+    config = '/var/node433/local/ryan_a/ViT-Adapter/segmentation/configs/s2c/upernet_deit_adapter_small_512_160k_s2c.py'
+
     # config = None
     cfg_options = None
-    work_dir = "/var/node433/local/ryan_a/data/mados_fine_tuning/transform_fixed-mixed_aug_e04"
+    work_dir = "/var/node433/local/ryan_a/data/mados_fine_tuning/transform_fixed-mixed_aug_e04_t"
     # work_dir = '/gpfs/work5/0/prjs0790/data/run_outputs/checkpoints/test'
     # work_dir = None
     load_from = None

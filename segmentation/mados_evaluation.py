@@ -263,9 +263,9 @@ def main(options, cfg):
     # Load model from specific epoch to continue the training or start the evaluation
 
     # model_file = '/gpfs/work5/0/prjs0790/data/first_model_mados/upernet_deit_adapter_small_512_160k_mados/best_mIoU_iter_5000.pth'
-    # model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/leo_new_trans_e09/best_mIoU_iter_33000.pth'
+    model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/leo_new_trans_e09/best_mIoU_iter_33000.pth'
     # model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/new_queue-with_dino_loss_e04/best_mIoU_iter_34000.pth'
-    model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/new_queue-with_dino_loss_e14/best_mIoU_iter_38000.pth'
+    # model_file = '/var/node433/local/ryan_a/data/mados_fine_tuning/new_queue-with_dino_loss_e14/best_mIoU_iter_38000.pth'
 
     print(model_file)
 

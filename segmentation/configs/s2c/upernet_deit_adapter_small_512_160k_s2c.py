@@ -78,7 +78,7 @@ lr_config = dict(_delete_=True, policy='poly',
 # By default, models are trained on 8 GPUs with 2 images per GPU
 data=dict(
     # samples_per_gpu=60,
-    samples_per_gpu=12,
+    samples_per_gpu=24,
           val=dict(pipeline=test_pipeline),
           test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')
