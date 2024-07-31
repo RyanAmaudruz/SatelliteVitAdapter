@@ -23,7 +23,7 @@ import os.path as osp
 
 
 @DATASETS.register_module(force=True)
-class CustomMadosDataset(Dataset):
+class CustomDataset(Dataset):
     """Custom dataset for semantic segmentation. An example of file structure
     is as followed.
 
@@ -492,7 +492,7 @@ class CustomMadosDataset(Dataset):
 
 
 @DATASETS.register_module(force=True)
-class DFC2020Dataset(CustomMadosDataset):
+class DFC2020Dataset(CustomDataset):
     """DFC2020 dataset.
     
     We currently support Sentinel-2 13 bands. We use the official 5128/986 "test"/"validation" set as our "train/test" set.

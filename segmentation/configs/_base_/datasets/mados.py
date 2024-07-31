@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'madosDataset'
-data_root = '/var/node433/local/ryan_a/data/mados/mados_mmseg'
+data_root = '/gpfs/work5/0/prjs0790/data/mados/mados_mmseg'
 # img_norm_cfg = dict(
 #     mean=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0], std=[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000], to_rgb=False)
 

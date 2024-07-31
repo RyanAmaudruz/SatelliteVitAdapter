@@ -1,0 +1,8 @@
+name: vit_adapt
+channels:
+  - defaults
+dependencies:
+  - conda-forge::cudatoolkit
+  - cudatoolkit-dev
+  - python=3.8
+prefix: /var/node433/local/ryan_a/miniconda3/envs/vit_adapt
