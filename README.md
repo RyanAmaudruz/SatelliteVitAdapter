@@ -54,10 +54,6 @@ We add conda yaml files to set up the Python environment under the [installation
 - [ViT-Adapter Script](https://github.com/RyanAmaudruz/SatelliteVitAdapter/tree/main/snellius/train_vit_adapter_das4.sh): Semantic segmentation with ViT-Adapter + UPerNet.
 - [MADOS eval Script](https://github.com/RyanAmaudruz/SatelliteVitAdapter/tree/main/snellius/eval_mados_vit_adapter_das4.sh): MADOS dataset test set detailed evaluation.
 
-- snellius/train_vit_adapter_das4.sh
-SatelliteVitAdapter/snellius
-/eval_mados_vit_adapter_das4.sh
-
 ## License
 
 This repository is released under the Apache 2.0 license as found in the [LICENSE](LICENSE.md) file.
